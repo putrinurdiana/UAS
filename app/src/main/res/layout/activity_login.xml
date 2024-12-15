@@ -79,7 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="12dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp" />
+                android:layout_marginEnd="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -110,8 +110,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 </FrameLayout>

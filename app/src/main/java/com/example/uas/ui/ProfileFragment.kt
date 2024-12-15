@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.uas.ui.LoginFragment
 import com.example.uas.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -44,7 +43,7 @@ class ProfileFragment : Fragment() {
             editor.apply()
 
             // Menavigasi ke LoginActivity setelah logout
-            val intent = Intent(requireActivity(), LoginFragment::class.java)
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)
 
             // Menutup aktivitas ProfileFragment agar tidak kembali ke fragment ini

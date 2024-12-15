@@ -16,12 +16,12 @@
         android:theme="@style/Theme.UAS"
         tools:targetApi="31">
 
-        <!-- Menambahkan deklarasi untuk AddTaskActivity -->
+        <!-- Aktivitas untuk AddTask -->
         <activity
             android:name=".ui.AddTaskActivity"
-            android:exported="true" />
+            android:exported="false" />
 
-        <!-- Aktivitas utama (MainActivity) -->
+        <!-- MainActivity dengan intent-filter -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -31,7 +31,18 @@
             </intent-filter>
         </activity>
 
-        <!-- Aktivitas EditTaskActivity -->
+        <!-- LoginActivity dengan intent-filter -->
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true">
+            <!-- Jika LoginActivity juga harus dapat diakses oleh aplikasi lain, tambahkan intent filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Aktivitas EditTask -->
         <activity
             android:name=".ui.EditTaskActivity"
             android:exported="false" />

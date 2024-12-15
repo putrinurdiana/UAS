@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Menambahkan izin untuk akses internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,18 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAS"
         tools:targetApi="31">
+
+        <!-- Menambahkan deklarasi untuk AddTaskActivity -->
         <activity
-            android:name=".ui.EditTaskActivity"
-            android:exported="false" />
+            android:name=".ui.AddTaskActivity"
+            android:exported="true" />
+
+        <!-- Aktivitas utama (MainActivity) -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Aktivitas EditTaskActivity -->
+        <activity
+            android:name=".ui.EditTaskActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

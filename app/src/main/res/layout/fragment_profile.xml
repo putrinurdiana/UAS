@@ -3,12 +3,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    tools:context=".ui.MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Kontainer utama menggunakan LinearLayout untuk menata elemen-elemen -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <!-- Teks Profil -->
+        <TextView
+            android:id="@+id/Profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="40dp"
+            android:gravity="center"/>
+
+
+        <!-- Container untuk Nama, Email, dan Password -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/line"
+            android:layout_marginTop="80dp"
+            android:padding="16dp">
+
+            <!-- Teks untuk Nama Pengguna -->
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama         :"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Teks untuk Email Pengguna -->
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email          :"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Teks untuk Password Pengguna -->
+            <TextView
+                android:id="@+id/tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password  :"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="16dp"/>
+        </LinearLayout>
+
+        <!-- Tombol Logout -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:background="@drawable/button"
+            app:backgroundTint="@null"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="360dp"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
 </FrameLayout>

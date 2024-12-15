@@ -1,57 +1,56 @@
 package com.example.uas.ui
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.uas.ARG_PARAM1
-import com.example.uas.ARG_PARAM2
-import com.example.uas.R
+import com.example.uas.ui.LoginFragment
+import com.example.uas.databinding.FragmentProfileBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [profileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+        // Menggunakan View Binding
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment profileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            profileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // Inisialisasi SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+
+        // Mengambil data dari SharedPreferences
+        val username = sharedPreferences.getString("username", "User")
+        val email = sharedPreferences.getString("email", "user@example.com")
+        val password = sharedPreferences.getString("password", "defaultPassword")
+
+        // Menampilkan data pada TextView menggunakan binding
+        binding.tvName.text = "Nama : $username"
+        binding.tvEmail.text = "Email : $email"
+        binding.tvPassword.text = "Password : $password"
+
+        // Menangani klik tombol logout
+        binding.btnLogout.setOnClickListener {
+            // Menghapus data login dari SharedPreferences
+            val editor = sharedPreferences.edit()
+            editor.clear()  // Menghapus semua data yang ada di SharedPreferences
+            editor.apply()
+
+            // Menavigasi ke LoginActivity setelah logout
+            val intent = Intent(requireActivity(), LoginFragment::class.java)
+            startActivity(intent)
+
+            // Menutup aktivitas ProfileFragment agar tidak kembali ke fragment ini
+            requireActivity().finish()
+        }
+
+        return binding.root
     }
 }

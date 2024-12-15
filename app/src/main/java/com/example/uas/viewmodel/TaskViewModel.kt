@@ -15,7 +15,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     val allTasks: LiveData<List<TaskList>> = taskDao.allTasks
 
     // Fungsi untuk menambahkan task
-    fun insertTask(task: TaskList) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(task: TaskList) = viewModelScope.launch(Dispatchers.IO) {
         taskDao.insert(task)
     }
 

@@ -14,7 +14,7 @@ import com.example.uas.R
  * Use the [profileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class profileFragment : Fragment() {
+class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null

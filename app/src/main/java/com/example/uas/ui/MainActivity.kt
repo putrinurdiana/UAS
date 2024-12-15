@@ -3,7 +3,6 @@ package com.example.uas.ui
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,74 +20,52 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Menginflate layout ActivityMainBinding
+        // Inflate layout using View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inisialisasi SharedPreferences
+        // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
 
-        // Cek status login pengguna
+        // Check login status
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
-        // Jika pengguna belum login, arahkan ke LoginActivity
+        // If not logged in, navigate to LoginActivity
         if (!isLoggedIn) {
             navigateToLoginActivity()
-            return // Menghentikan eksekusi kode MainActivity lebih lanjut
+            return // Stop further execution
         }
 
-        // Menemukan NavHostFragment yang telah didefinisikan di layout
+        // Set up Navigation Controller
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        // Menghubungkan BottomNavigationView dengan NavController untuk navigasi antar fragment
+        // Set up Bottom Navigation with NavController
         val bottomNavView: BottomNavigationView = binding.bottomNavigationView
         NavigationUI.setupWithNavController(bottomNavView, navController)
 
-        // Memastikan BottomNavigationView muncul saat aplikasi dijalankan
-        bottomNavView.visibility = View.VISIBLE
-
-        // Pastikan HomeFragment ditampilkan saat aplikasi dibuka
-        if (savedInstanceState == null) {
-            // Menavigasi ke HomeFragment jika pertama kali membuka MainActivity
-            navController.navigate(R.id.homeFragment)
-        }
+        // Optionally: Handle bottom navigation item selections (not needed if NavigationUI works fine)
+        // This is removed as `setupWithNavController` handles item selections automatically.
     }
 
-    // Fungsi untuk menavigasi ke LoginActivity
+    // Function to navigate to LoginActivity
     private fun navigateToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
+        // Set flag to ensure user cannot go back to MainActivity after logout
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-        finish() // Menutup MainActivity agar tidak bisa kembali ke MainActivity tanpa login
+        finish() // Close MainActivity to prevent back navigation
     }
 
-    // Fungsi untuk menangani login yang berhasil
-    fun onLoginSuccess() {
-        // Simpan status login ke SharedPreferences
-        with(sharedPreferences.edit()) {
-            putBoolean("isLoggedIn", true)
-            apply()
-        }
-
-        // Menampilkan BottomNavigationView setelah login sukses
-        binding.bottomNavigationView.visibility = View.VISIBLE
-
-        // Navigasi ke HomeFragment
-        navController.navigate(R.id.homeFragment)
-    }
-
-    // Fungsi untuk logout pengguna
+    // Function to log out the user
     fun logout() {
-        // Hapus status login dari SharedPreferences
+        // Clear login status from SharedPreferences
         with(sharedPreferences.edit()) {
             putBoolean("isLoggedIn", false)
             apply()
         }
 
-        // Navigasi ke LoginActivity setelah logout
+        // Navigate to LoginActivity after logout
         navigateToLoginActivity()
-
-        // Sembunyikan BottomNavigationView setelah logout
-        binding.bottomNavigationView.visibility = View.GONE
     }
 }

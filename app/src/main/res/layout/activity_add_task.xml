@@ -23,7 +23,7 @@
             android:contentDescription="Back" />
 
         <!-- Judul Halaman -->
-        <TextView
+        <EditText
             android:id="@+id/judul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

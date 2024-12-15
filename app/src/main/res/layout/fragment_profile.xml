@@ -36,15 +36,6 @@
             android:layout_marginTop="80dp"
             android:padding="16dp">
 
-            <!-- Teks untuk Nama Pengguna -->
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama         :"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp"/>
 
             <!-- Teks untuk Email Pengguna -->
             <TextView

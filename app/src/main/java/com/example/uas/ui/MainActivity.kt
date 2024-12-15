@@ -44,8 +44,20 @@ class MainActivity : AppCompatActivity() {
         val bottomNavView: BottomNavigationView = binding.bottomNavigationView
         NavigationUI.setupWithNavController(bottomNavView, navController)
 
-        // Optionally: Handle bottom navigation item selections (not needed if NavigationUI works fine)
-        // This is removed as `setupWithNavController` handles item selections automatically.
+        // Handle bottom navigation item selection, especially the Profile icon
+        bottomNavView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> {
+                    navController.navigate(R.id.homeFragment) // Navigate to home fragment
+                    true
+                }
+                R.id.profileFragment -> {
+                    navController.navigate(R.id.profileFragment) // Navigate to profile fragment
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     // Function to navigate to LoginActivity
